@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.venuetize.deeplinkpoc",
+    "sha256_cert_fingerprints":
+    ["A2:35:9E:AC:43:AD:60:F2:EC:1D:79:54:51:00:EF:CA:94:13:8C:B5:B7:47:47:87:DC:64:6C:D5:8B:9E:89:CF"]
+  }
+}]
