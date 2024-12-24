@@ -5,15 +5,18 @@
 </head>
 <body>
    <script>
-      function launchAppWithFallback(uri, fallbackUrl) {
-    // Try to open the app
-    window.location.href = uri;
+      const urlParams = new URLSearchParams(window.location.search);
 
-    // Fallback to a web page if the app is not installed
+const dl=urlParams.get(dl)
+
+      function launchAppWithFallback(uri, fallbackUrl) {
+    window.location.href = uri;
+      
     setTimeout(() => {
         window.location.href = fallbackUrl;
     }, 1000); // Adjust the timeout as needed
 }
+      const appUrl='https://vrinfratech.in/deeplink_product_details_12'+dl
 
       launchAppWithFallback("https://vrinfratech.in/deeplink_product_details_12", "https://play.google.com/store/apps/details?id=com.venuetize.deeplinkpoc/");
 
