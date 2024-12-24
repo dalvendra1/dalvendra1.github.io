@@ -17,9 +17,9 @@
       const urlParams = new URLSearchParams(window.location.search);
       const dl=urlParams.get('dl')
 
-      const appUrl='https://vrinfratech.in/deeplink_product_details_32'+dl
+      const appUrl='https://vrinfratech.in/deeplink_product_details_32'
 
-      launchAppWithFallback(appUrl, "https://play.google.com/store/apps/details?id=com.venuetize.deeplinkpoc/");
+      launchAppWithFallback(dl, "https://play.google.com/store/apps/details?id=com.venuetize.deeplinkpoc/");
 
    </script>
 </body>
