@@ -5,18 +5,19 @@
 </head>
 <body>
    <script>
-      	//const urlParams = new URLSearchParams(window.location.search);
-
-	//const dl=urlParams.get(dl)
 
       function launchAppWithFallback(uri, fallbackUrl) {
-    window.location.href = uri;
+    	window.location.href = uri;
       
-    setTimeout(() => {
-        window.location.href = fallbackUrl;
-    }, 1000); // Adjust the timeout as needed
-}
-      const appUrl='https://vrinfratech.in/deeplink_product_details_321'
+    	setTimeout(() => {
+        	window.location.href = fallbackUrl;
+    		}, 1000); // Adjust the timeout as needed
+	}
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const dl=urlParams.get(dl)
+
+      const appUrl='https://vrinfratech.in/deeplink_product_details_32'
 
       launchAppWithFallback(appUrl, "https://play.google.com/store/apps/details?id=com.venuetize.deeplinkpoc/");
 
