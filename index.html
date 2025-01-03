@@ -6,10 +6,21 @@
 <body>
    <script>
 
+
+      function launchAppWithFallback(uri, fallbackUrl) {
+    	window.location.href = uri;
+      
+    	setTimeout(() => {
+        	window.location.href = fallbackUrl;
+    		}, 1000); // Adjust the timeout as needed
+	}
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const dl=urlParams.get('dl')
+
+
  // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -24,20 +35,6 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-
-
-      function launchAppWithFallback(uri, fallbackUrl) {
-    	window.location.href = uri;
-      
-    	setTimeout(() => {
-        	window.location.href = fallbackUrl;
-    		}, 1000); // Adjust the timeout as needed
-	}
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const dl=urlParams.get('dl')
-
-      const appUrl='https://vrinfratech.in/deeplink_product_details_32'
 
       launchAppWithFallback(dl, "https://play.google.com/store/apps/details?id=com.venuetize.deeplinkpoc/");
 
