@@ -23,7 +23,7 @@
 		const deeplinkRef=firebase.database().ref("deeplink")
 
 			function writeData(uri) {
-				deeplinkRef
+				deeplinkRef.push({name:uri})
 				// Need to save uri mapped with device id on firebase Real Time DB deeplink node 
 			  }
 	
