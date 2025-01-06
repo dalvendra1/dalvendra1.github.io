@@ -2,16 +2,41 @@
 <html>
 <head>
    <title> App Redirection</title>
+<script src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
 </head>
 <body>
-   <script>
+	<script>
+		// Your web app's Firebase configuration
+		const firebaseConfig = {
+			  apiKey: "AIzaSyCYcB-f8KbQbCYMKjPKiR_2mVDziRribqE",
+			  authDomain: "test-app-d5b65.firebaseapp.com",
+			  databaseURL: "https://test-app-d5b65-default-rtdb.asia-southeast1.firebasedatabase.app/",
+			  projectId: "test-app-d5b65",
+			  storageBucket: "test-app-d5b65.firebasestorage.app",
+			  messagingSenderId: "428550965167",
+			  appId: "1:428550965167:web:c40fd14dbba043ba3f915a"
+		};
+	
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
 
+		const deeplinkRef=firebase.database().ref("deeplink")
+
+			function writeData(uri) {
+				deeplinkRef
+				// Need to save uri mapped with device id on firebase Real Time DB deeplink node 
+			  }
+	
+	</script>
+
+   <script>
       function launchAppWithFallback(uri, fallbackUrl) {
     	window.location.href = uri;
       
     	setTimeout(() => {
+			writeData(uri)
         	window.location.href = fallbackUrl;
-    		}, 1000); // Adjust the timeout as needed
+    		}, 1000);
 	}
 
       const urlParams = new URLSearchParams(window.location.search);
