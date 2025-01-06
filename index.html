@@ -24,6 +24,8 @@
 
 			function writeData(uri) {
 				deeplinkRef.push({name:uri})
+			
+        		window.location.href = fallbackUrl;
 				// Need to save uri mapped with device id on firebase Real Time DB deeplink node 
 			  }
 	
