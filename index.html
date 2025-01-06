@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title> App Redirection</title>
-<script src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
+    <title>App Redirection</title>
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
+    <!-- Firebase Database -->
+    <script src="https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js"></script>
 </head>
 <body>
-	<script>
-		// Your web app's Firebase configuration
-		const firebaseConfig = {
-			  apiKey: "AIzaSyCYcB-f8KbQbCYMKjPKiR_2mVDziRribqE",
-			  authDomain: "test-app-d5b65.firebaseapp.com",
-			  databaseURL: "https://test-app-d5b65-default-rtdb.asia-southeast1.firebasedatabase.app/",
-			  projectId: "test-app-d5b65",
-			  storageBucket: "test-app-d5b65.firebasestorage.app",
-			  messagingSenderId: "428550965167",
-			  appId: "1:428550965167:web:c40fd14dbba043ba3f915a"
-		};
-	
-		// Initialize Firebase
-		const app = initializeApp(firebaseConfig);
-
-		const deeplinkRef=firebase.database().ref("deeplink")
-
-			function writeData(uri) {
-				deeplinkRef.push({name:uri})
-				// Need to save uri mapped with device id on firebase Real Time DB deeplink node 
-			  }
-	
-	</script>
-
-   <script>
-      function launchAppWithFallback(uri, fallbackUrl) {
-    	window.location.href = uri;
-      
-    	setTimeout(() => {
-        	window.location.href = fallbackUrl;
-			writeData(uri)
-    		}, 1000);
-	}
-
-      const urlParams = new URLSearchParams(window.location.search);
-
-      const dl=urlParams.get('dl')
-
-      launchAppWithFallback(dl, "https://play.google.com/store/apps/details?id=com.venuetize.deeplinkpoc/");
-
-   </script>
+    <script>
+        // Web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCYcB-f8KbQbCYMKjPKiR_2mVDziRribqE",
+            authDomain: "test-app-d5b65.firebaseapp.com",
+            databaseURL: "https://test-app-d5b65-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            projectId: "test-app-d5b65",
+            storageBucket: "test-app-d5b65.appspot.com",
+            messagingSenderId: "428550965167",
+            appId: "1:428550965167:web:c40fd14dbba043ba3f915a"
+        };
+ 
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+ 
+        // Reference to the "deeplink" node in the database
+        const deeplinkRef = database.ref("deeplink");
+ 
+        // Function to write data to the database
+        function writeData(uri) {
+            deeplinkRef.push({ name: uri }).then(() => {
+                console.log("Data written successfully:", uri);
+            }).catch((error) => {
+                console.error("Error writing data:", error);
+            });
+        }
+ 
+        // Function to launch the app with a fallback URL
+        function launchAppWithFallback(uri, fallbackUrl) {
+            // Try to redirect to the app URI
+            window.location.href = uri;
+ 
+            // Fallback logic after 1 second if the app doesn't open
+            setTimeout(() => {
+                writeData(uri); // Save URI to Firebase
+                window.location.href = fallbackUrl; // Redirect to fallback URL
+            }, 1000);
+        }
+ 
+        // Extract the "dl" parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const dl = urlParams.get('dl');
+ 
+        // If a deeplink is provided, attempt to launch the app
+        if (dl) {
+            launchAppWithFallback(dl, "https://play.google.com/store/apps/details?id=com.venuetize.deeplinkpoc");
+        } else {
+            console.error("No deeplink (dl) parameter provided in the URL.");
+        }
+    </script>
 </body>
 </html>
