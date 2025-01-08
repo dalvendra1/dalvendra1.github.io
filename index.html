@@ -22,7 +22,7 @@
 
         // If a deeplink is provided, attempt to launch the app
         if (dl) {
-            launchAppWithFallback(dl, "https://play.google.com/store/apps/details?id=com.intermiamicf.androidapp&referrer="+dl);
+            launchAppWithFallback(dl, "https://play.google.com/store/apps/details?id=com.intermiamicf.androidapp&launch=true&referrer="+dl);
         } else {
             console.error("No deeplink (dl) parameter provided in the URL.");
         }
