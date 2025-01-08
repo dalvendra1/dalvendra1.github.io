@@ -2,53 +2,16 @@
 <html>
 <head>
     <title>App Redirection</title>
-    <!-- Firebase App (the core Firebase SDK) -->
-    <script src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
-    
-    <!-- Firebase Database -->
-    <script src="https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js"></script>
 </head>
-<body>
-   
-    
+<body>    
     <script>
-        //  var firebase = require("firebase/app");
-        // Web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCYcB-f8KbQbCYMKjPKiR_2mVDziRribqE",
-            authDomain: "test-app-d5b65.firebaseapp.com",
-            databaseURL: "https://test-app-d5b65-default-rtdb.asia-southeast1.firebasedatabase.app/",
-            projectId: "test-app-d5b65",
-            storageBucket: "test-app-d5b65.appspot.com",
-            messagingSenderId: "428550965167",
-            appId: "1:428550965167:web:c40fd14dbba043ba3f915a"
-        };
- 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
- 
-        // Reference to the "deeplink" node in the database
-        const deeplinkRef = database.ref("deeplinks");
- 
-        // Function to write data to the database
-        function writeData(uri) {
-            var deviceId= MediaDeviceInfo.deviceId
-            deeplinkRef.push({ deviceId: uri }).then(() => {
-                console.log("Data written successfully:", uri);
-            }).catch((error) => {
-                console.error("Error writing data:", error);
-            });
-        }
  
         // Function to launch the app with a fallback URL
         function launchAppWithFallback(uri, fallbackUrl) {
             // Try to redirect to the app URI
             window.location.href = uri;
- 
-            // Fallback logic after 1 second if the app doesn't open
+
             setTimeout(() => {
-                writeData(uri); // Save URI to Firebase
                 window.location.href = fallbackUrl; // Redirect to fallback URL
             }, 1000);
         }
@@ -56,12 +19,10 @@
         // Extract the "dl" parameter from the URL
         const urlParams = new URLSearchParams(window.location.search);
         const dl = urlParams.get('dl');
- 
-        writeData("https://play.google.com/store/apps/details?id=com.venuetize.deeplinkpoc");
 
         // If a deeplink is provided, attempt to launch the app
         if (dl) {
-            launchAppWithFallback(dl, "https://play.google.com/store/apps/details?id=com.venuetize.deeplinkpoc");
+            launchAppWithFallback(dl, "https://play.google.com/store/apps/details?id=com.intermiamicf.androidapp&referrer="+dl);
         } else {
             console.error("No deeplink (dl) parameter provided in the URL.");
         }
