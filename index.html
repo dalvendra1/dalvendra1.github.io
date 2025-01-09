@@ -13,7 +13,7 @@
 
             setTimeout(() => {
                 window.location.href = fallbackUrl; // Redirect to fallback URL
-            }, 1000);
+            }, 500);
         }
  
         // Extract the "dl" parameter from the URL
@@ -22,7 +22,7 @@
 
         // If a deeplink is provided, attempt to launch the app
         if (dl) {
-            launchAppWithFallback(dl, "https://play.google.com/store/apps/details?id=com.intermiamicf.androidapp&launch=true&referrer="+dl);
+            launchAppWithFallback(dl, "https://play.google.com/store/apps/details?id=com.intermiamicf.androidapp&referrer="+dl);
         } else {
             console.error("No deeplink (dl) parameter provided in the URL.");
         }
